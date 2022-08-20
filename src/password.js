@@ -19,8 +19,25 @@ function on_wrong_passwrd() {
   inp_passw.value = "";
 }
 
+function hash(encrypt) {
+  var hash = 0;
+  for (var i in encrypt) {
+    var ch = encrypt.charAt(i);
+    hash += (hash << 5) - hash + ch;
+  }
+
+  return hash;
+}
+
+function encrypt(text) {
+  return window.btoa(text);
+}
+
 function check_password() {
-  if (inp_passw.value === passwrd) {
+  console.log(passwrd);
+  console.log(hash(encrypt(inp_passw.value)));
+
+  if (hash(encrypt(inp_passw.value)) === passwrd) {
     on_ok_passwrd();
     return;
   }
@@ -33,6 +50,7 @@ var inp_passw = document.querySelector("#input");
 var box_form = document.querySelector("#box");
 var input_div = document.querySelector("#input-field");
 
-var passwrd = "jkferreira1126";
+var passwrd =
+  "00aNaNmNaNtNaNmNaNZNaNXNaNJNaNyNaNZNaNWNaNlNaNyNaNYNaNTNaNENaNxNaNMNaNjNaNYNaN=";
 
 btn_enter.addEventListener("click", check_password);
